@@ -1,0 +1,398 @@
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUser (20141023171847)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_name" varchar(255) NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_users_on_user_name" ON "users" ("user_name")[0m
+  [1m[35mSQL (28.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141023171847"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePoll (20141023172317)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "polls" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "author_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141023172317"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateQuestion (20141023172332)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question" text NOT NULL, "poll_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141023172332"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAnswerChoice (20141023172352)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "answer_choices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "answer" text, "question_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141023172352"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateResponse (20141023172412)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "responses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "answer_choice_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_responses_on_answer_choice_id" ON "responses" ("answer_choice_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_responses_on_user_id" ON "responses" ("user_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141023172412"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_user_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_user_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "user_name") VALUES (?, ?, ?)  [["created_at", "2014-10-23 18:59:20.246905"], ["updated_at", "2014-10-23 18:59:20.246905"], ["user_name", "tommy"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "user_name") VALUES (?, ?, ?)[0m  [["created_at", "2014-10-23 18:59:34.636121"], ["updated_at", "2014-10-23 18:59:34.636121"], ["user_name", "sara"]]
+  [1m[35m (5.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "updated_at", "user_name") VALUES (?, ?, ?)  [["created_at", "2014-10-23 19:00:00.219141"], ["updated_at", "2014-10-23 19:00:00.219141"], ["user_name", "humphrey"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "updated_at", "user_name") VALUES (?, ?, ?)[0m  [["created_at", "2014-10-23 19:00:11.320362"], ["updated_at", "2014-10-23 19:00:11.320362"], ["user_name", "samantha"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "polls" ("author_id", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["author_id", 1], ["created_at", "2014-10-23 20:19:56.274007"], ["title", "Soup_types"], ["updated_at", "2014-10-23 20:19:56.274007"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("created_at", "poll_id", "question", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2014-10-23 20:21:40.967620"], ["poll_id", 1], ["question", "What's your favorite soup?"], ["updated_at", "2014-10-23 20:21:40.967620"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "questions" ("created_at", "poll_id", "question", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2014-10-23 20:22:12.956147"], ["poll_id", 1], ["question", "What's your favorite salad?"], ["updated_at", "2014-10-23 20:22:12.956147"]]
+  [1m[36m (293.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "questions"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_user_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_user_name' AND type='index'
+[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangeAnswerColumn (20141023204012)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.1ms)[0m  [1mCREATE TEMPORARY TABLE "aanswer_choices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "answer_choice" text, "question_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "answer_choices"
+  [1m[36m (59.3ms)[0m  [1mDROP TABLE "answer_choices"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "answer_choices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "answer_choice" text, "question_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aanswer_choices"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "aanswer_choices"
+  [1m[36mSQL (2.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141023204012"]]
+  [1m[35m (3.1ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_answer_choice_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_user_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_user_name' AND type='index'
+
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["answer_choice", "Chowder"], ["created_at", "2014-10-23 20:43:49.998958"], ["question_id", 1], ["updated_at", "2014-10-23 20:43:49.998958"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["answer_choice", "Tortilla"], ["created_at", "2014-10-23 20:44:22.677809"], ["question_id", 1], ["updated_at", "2014-10-23 20:44:22.677809"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["answer_choice", "Chili"], ["created_at", "2014-10-23 20:44:33.035356"], ["question_id", 1], ["updated_at", "2014-10-23 20:44:33.035356"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT  "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["answer_choice", "Caesar"], ["created_at", "2014-10-23 20:46:15.376903"], ["question_id", 2], ["updated_at", "2014-10-23 20:46:15.376903"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["answer_choice", "Cucumber"], ["created_at", "2014-10-23 20:46:49.589108"], ["question_id", 2], ["updated_at", "2014-10-23 20:46:49.589108"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answer_choices" ("answer_choice", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["answer_choice", "Chicken Cobb"], ["created_at", "2014-10-23 20:47:10.107159"], ["question_id", 2], ["updated_at", "2014-10-23 20:47:10.107159"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses"[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "answer_choices"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_choice_id", 1], ["created_at", "2014-10-23 20:52:40.905936"], ["updated_at", "2014-10-23 20:52:40.905936"], ["user_id", 1]]
+  [1m[35m (5.9ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_choice_id", 2], ["created_at", "2014-10-23 20:54:06.378095"], ["updated_at", "2014-10-23 20:54:06.378095"], ["user_id", 2]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_choice_id", 3], ["created_at", "2014-10-23 20:54:34.031627"], ["updated_at", "2014-10-23 20:54:34.031627"], ["user_id", 3]]
+  [1m[36m (5.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses"
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_choice_id", 4], ["created_at", "2014-10-23 20:56:27.531672"], ["updated_at", "2014-10-23 20:56:27.531672"], ["user_id", 1]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "responses"
+  [1m[36mResponse Load (0.4ms)[0m  [1mSELECT "responses".* FROM "responses"[0m
+  [1m[35mResponse Load (0.2ms)[0m  SELECT  "responses".* FROM "responses"   ORDER BY "responses"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)  [["question_id", 1]]
+SQLite3::SQLException: ambiguous column name: id: SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)[0m  [["question_id", 1]]
+SQLite3::SQLException: ambiguous column name: id: SELECT COUNT(*) FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)
+  [1m[35mResponse Load (0.3ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)  [["question_id", 1]]
+SQLite3::SQLException: ambiguous column name: id: SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)
+  [1m[36mResponse Load (0.3ms)[0m  [1mSELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)[0m  [["question_id", 1]]
+SQLite3::SQLException: ambiguous column name: id: SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != self.id)
+  [1m[35mResponse Load (0.1ms)[0m  SELECT  "responses".* FROM "responses"   ORDER BY "responses"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != 1)  [["question_id", 1]]
+SQLite3::SQLException: ambiguous column name: id: SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (id != 1)
+  [1m[36mResponse Load (0.1ms)[0m  [1mSELECT  "responses".* FROM "responses"   ORDER BY "responses"."id" ASC LIMIT 1[0m
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != 1)[0m  [["question_id", 1]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != NULL)[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != 1)  [["question_id", 1]]
+  [1m[36mResponse Load (0.1ms)[0m  [1mSELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != NULL)[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT  "responses".* FROM "responses"   ORDER BY "responses"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT  "responses".* FROM "responses"   ORDER BY "responses"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != NULL AND NULL IS NOT NULL)  [["question_id", 1]]
+  [1m[36mResponse Load (26.0ms)[0m  [1mSELECT "responses".* FROM "responses"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != NULL AND NULL IS NOT NULL)  [["question_id", 1]]
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_choice_id", 1], ["created_at", "2014-10-23 21:53:18.243946"], ["updated_at", "2014-10-23 21:53:18.243946"], ["user_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses"[0m
+  [1m[35mResponse Load (0.2ms)[0m  SELECT  "responses".* FROM "responses"  WHERE "responses"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != 3 AND 3 IS NOT NULL)  [["question_id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ? AND (responses.id != NULL AND NULL IS NOT NULL)  [["question_id", 1]]
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses"[0m
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mResponse Load (0.2ms)[0m  [1mSELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "responses" ("answer_choice_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_choice_id", 3], ["created_at", "2014-10-23 22:13:00.028899"], ["updated_at", "2014-10-23 22:13:00.028899"], ["user_id", 4]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35mResponse Load (0.2ms)[0m  SELECT  "responses".* FROM "responses"  WHERE "responses"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT  "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPoll Load (0.2ms)[0m  [1mSELECT  "polls".* FROM "polls"  WHERE "polls"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions" INNER JOIN "answer_choices" ON "questions"."id" = "answer_choices"."question_id" WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mResponse Load (0.1ms)[0m  SELECT "responses".* FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36mAnswerChoice Load (0.1ms)[0m  [1mSELECT  "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPoll Load (0.1ms)[0m  [1mSELECT  "polls".* FROM "polls"  WHERE "polls"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "responses" INNER JOIN "answer_choices" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses"
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "responses"  WHERE "responses"."answer_choice_id" = ?[0m  [["answer_choice_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "responses"  WHERE "responses"."answer_choice_id" = ?  [["answer_choice_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "responses"  WHERE "responses"."answer_choice_id" = ?[0m  [["answer_choice_id", 3]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses"  WHERE "responses"."answer_choice_id" IN (1, 2, 3)
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mQuestion Load (0.3ms)[0m        SELECT answer_choice.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+SQLite3::SQLException: no such table: answer_choice:       SELECT answer_choice.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mQuestion Load (0.3ms)[0m        SELECT answer_choices.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mResponse Load (0.2ms)[0m  SELECT "responses".* FROM "responses"  WHERE "responses"."answer_choice_id" IN (1, 2, 3)
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.3ms)[0m        SELECT answer_choices.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.3ms)[0m        SELECT answer_choices.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m        SELECT answer_choices.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m        SELECT COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mAnswerChoice Count (0.3ms)[0m  [1m      SELECT answer_choices.*, COUNT(*)
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+[0m
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m        SELECT answer_choices.*, COUNT(*) AS count
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m        SELECT answer_choices.*, COUNT(*) AS count
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m        SELECT answer_choices.*, COUNT(*) AS choice_count
+      FROM answer_choices
+      JOIN responses ON responses.answer_choice_id = answer_choices.id
+      WHERE answer_choices.question_id = 1
+      GROUP BY answer_choice
+
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT "answer_choices".* FROM "answer_choices" INNER JOIN "responses" ON "responses"."answer_choice_id" = "answer_choices"."id" WHERE "answer_choices"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT "answer_choices".* FROM "answer_choices"  WHERE "answer_choices"."question_id" = ?  [["question_id", 1]]
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT answer_choices.*, COUNT(*) AS choice_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*  [["question_id", 1]]
+SQLite3::SQLException: near "*": syntax error: SELECT answer_choices.*, COUNT(*) AS choice_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT answer_choices.*, COUNT(*) AS choice_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*[0m  [["question_id", 1]]
+SQLite3::SQLException: near "*": syntax error: SELECT answer_choices.*, COUNT(*) AS choice_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT answer_choices.*, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*[0m  [["question_id", 1]]
+SQLite3::SQLException: near "*": syntax error: SELECT answer_choices.*, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.*
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT answer_choices.*, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  [["question_id", 1]]
+SQLite3::SQLException: near "*": syntax error: SELECT answer_choices.*, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT answer_choices.id, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  [["question_id", 1]]
+SQLite3::SQLException: near "*": syntax error: SELECT answer_choices.id, COUNT(responses.*) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.3ms)[0m  SELECT answer_choices.id, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  [["question_id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT answer_choices.* FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  [["question_id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mAnswerChoice Load (0.2ms)[0m  SELECT answer_choices.id AS crazy_num, answer_choices.text AS what_is_this, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  [["question_id", 1]]
+SQLite3::SQLException: no such column: answer_choices.text: SELECT answer_choices.id AS crazy_num, answer_choices.text AS what_is_this, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id
+  [1m[36mAnswerChoice Load (0.3ms)[0m  [1mSELECT  answer_choices.id AS crazy_num, answer_choices.text AS what_is_this, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  ORDER BY "answer_choices"."id" ASC LIMIT 1[0m  [["question_id", 1]]
+SQLite3::SQLException: no such column: answer_choices.text: SELECT  answer_choices.id AS crazy_num, answer_choices.text AS what_is_this, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id  ORDER BY "answer_choices"."id" ASC LIMIT 1
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"   ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mAnswerChoice Load (0.2ms)[0m  [1mSELECT answer_choices.id AS crazy_num, answer_choices.answer_choice AS what_is_this, COUNT(responses.id) AS response_count FROM "answer_choices" LEFT OUTER JOIN responses ON responses.answer_choice_id = answer_choices.id WHERE "answer_choices"."question_id" = ? GROUP BY answer_choices.id[0m  [["question_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"   ORDER BY "users"."id" ASC LIMIT 1
