@@ -41,6 +41,7 @@ class ShortenedUrl < ActiveRecord::Base
     through: :taggings,
     source: :tag_topic
   )
+  
   def self.random_code
     short_url = SecureRandom.base64
     while ShortenedUrl.exists?(short_url: short_url)
